@@ -89,53 +89,58 @@ const Shop = () => {
 
     return (
         <>
-            <select className="select select-info w-full max-w-xs m-5" onChange={e => setSize(e.target.value)}>
-                <option disabled selected>Show per page</option>
+            {/* Select Dropdown */}
+            <select
+                className="select select-info md:max-w-[90%] max-w-[75%] mx-auto m-2 md:m-5"
+                onChange={e => setSize(e.target.value)}
+            >
+                <option disabled selected>Show products per page</option>
                 <option value='5'>5</option>
                 <option value='10'>10</option>
                 <option value='15'>15</option>
                 <option value='20'>20</option>
             </select>
-            <div className='flex mx-5' >
 
-                <div className='w-4/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
-                    {
-                        products.map(product => <Products
+            {/* Products and Cart Section */}
+            <div className="flex flex-col lg:flex-row gap-5 mx-5">
+                {/* Products Section */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full lg:w-2/3">
+                    {products.map(product => (
+                        <Products
                             key={product._id}
                             product={product}
                             handleAddToCart={handleAddToCart}
-
-                        ></Products>)
-                    }
+                        />
+                    ))}
                 </div>
 
-                <div>
-                    <Cart clearCart={clearCart} cart={cart} >
+                {/* Cart Section */}
+                <div className="w-full lg:w-1/3 shadow-2xl p-5 rounded-lg">
+                    <Cart clearCart={clearCart} cart={cart}>
                         <Link to='/order'>
-                            <button className='btn btn-outline btn-warning w-full mt-5'> Review order <FontAwesomeIcon icon={faRightLong} />
+                            <button className='btn btn-outline btn-warning w-full mt-5'>
+                                Review order <FontAwesomeIcon icon={faRightLong} />
                             </button>
                         </Link>
                     </Cart>
                 </div>
-
-                {/*  
-           <div className="dropdown w-1/5 text-center mt-10">
-                <Cart cart={cart} ></Cart>
-            </div>  
-            */}
             </div>
-            <div className="join">
-                {
-                    [...Array(pages).keys()].map(number =>
-                        <input className="join-item btn btn-square mx-2 my-5 " type="radio" name="options" aria-label={number + 1}
 
-                            onClick={() => setPage(number)}
-                        />
-                    )
-                }
-
+            {/* Pagination */}
+            <div className="join flex flex-wrap gap-2 justify-center mx-auto my-5">
+                {[...Array(pages).keys()].map(number => (
+                    <input
+                        key={number}
+                        className="join-item btn btn-square md:mx-2 btn-sm md:btn-md"
+                        type="radio"
+                        name="options"
+                        aria-label={number + 1}
+                        onClick={() => setPage(number)}
+                    />
+                ))}
             </div>
         </>
+
     );
 };
 

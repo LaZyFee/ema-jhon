@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext';
+import Swal from 'sweetalert2';
 
 
 
@@ -17,17 +18,30 @@ const LogIn = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-
         signIn(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    text: 'Welcome',
+                    position: 'top',
+                    timer: 1000
+                });
                 form.reset();
                 navigate(from, { replace: true });
-
             })
-            .catch(error => console.error(error))
-    }
+            .catch(error => {
+                console.error("Login error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Invalid email or password',
+                    position: 'top',
+                    timer: 1000
+                });
+            });
+    };
+
 
 
 

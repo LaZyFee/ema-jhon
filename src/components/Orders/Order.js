@@ -13,22 +13,31 @@ const Order = () => {
         setCart(remaining);
         removeFromDb(id);
     }
+
     const clearCart = () => {
         setCart([]);
         deleteShoppingCart();
     }
-    return (
-        <div className='grid grid-cols-1 md:grid-cols-2'>
-            <div>
-                {
-                    cart.map(product => <Review key={product._id} product={product}
-                        handleRemoveItem={handleRemoveItem}></Review>)
-                }
-            </div>
-            <div className='w-1/2 shadow-2xl'>
-                <Cart clearCart={clearCart} cart={cart}>
 
-                </Cart>
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 ">
+            <div className="col-span-2 space-y-4">
+                {cart.length ? (
+                    cart.map(product => (
+                        <Review
+                            key={product._id}
+                            product={product}
+                            handleRemoveItem={handleRemoveItem}
+                        />
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500 font-medium mt-4">
+                        Your cart is empty. Start shopping now!
+                    </p>
+                )}
+            </div>
+            <div className="shadow-lg border rounded-lg p-4 sticky top-4 h-max">
+                <Cart clearCart={clearCart} cart={cart} />
             </div>
         </div>
     );
