@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Cart from '../Carts/Cart';
