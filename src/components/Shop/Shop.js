@@ -17,7 +17,7 @@ const Shop = () => {
 
 
     useEffect(() => {
-        const url = `https://ema-jhon-server-production.up.railway.app/products?page=${page}&size=${size}`
+        const url = `https://ema-jhon-server-delta.vercel.app/products?page=${page}&size=${size}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -40,7 +40,7 @@ const Shop = () => {
         const storedCart = getStoredCart();
         const savedCart = [];
         const ids = Object.keys(storedCart)
-        fetch('https://ema-jhon-server-production.up.railway.app/productsByIds', {
+        fetch('https://ema-jhon-server-delta.vercel.app/productsByIds', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
